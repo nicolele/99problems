@@ -132,3 +132,15 @@ rotate lst n
 removeAt :: [a] -> Int -> (Maybe a, [a])
 removeAt [] _ = (Nothing, [])
 removeAt lst k = (Just $ lst !! (k-1), take (k-1) lst ++ drop k lst)
+
+-- problem 21
+insertAt :: a -> [a] -> Int -> [a] 
+insertAt x lst k = take k lst ++ [x] ++ drop k lst
+
+-- problem 22
+range :: Int -> Int -> [Int]
+range i k 
+    | i <= k    = i : range (i+1) k
+    | otherwise = []
+
+-- problem 23
