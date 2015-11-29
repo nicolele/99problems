@@ -83,9 +83,10 @@ decode = concatMap $ decodeHelper
         decodeHelper (Single x) = [x]
         decodeHelper (Multiple n x) = replicate n x
 
--- probelm 13
+-- problem 13
+    -- finish later
 
--- probelm 14
+-- problem 14
 dupli :: [a] -> [a]
 dupli [] = []
 dupli (x:xs) = replicate 2 x ++ dupli xs
@@ -94,3 +95,40 @@ dupli (x:xs) = replicate 2 x ++ dupli xs
 repli :: [a] -> Int -> [a]
 repli [] _ = []
 repli (x:xs) n = replicate n x ++ repli xs n
+
+-- problem 16
+dropEvery :: (Eq a) => [a] -> Int -> [a]
+dropEvery [] _ = []
+dropEvery (x:xs) n = dropEvery' (x:xs) 1
+    where 
+        dropEvery' [] _ = []
+        dropEvery' (x:xs) count
+            | count == n = dropEvery' xs 1
+            | count /= n = x : dropEvery' xs (count + 1)
+
+-- problem 17
+split :: [a] -> Int -> ([a], [a])
+split (x:xs) n 
+    | n > 0     = let (f, l) = split xs (n-1)
+                    in (x : f, l)
+    | otherwise = ([], xs)
+
+-- problem 18
+slice :: [a] -> Int -> Int -> [a]
+slice [] _ _ = []
+slice lst i k 
+    | i > k  = error "out of bounds"
+    | i == 0 = error "indexing starts at 1" 
+    | i > 0  = take (k-i + 1) $ drop (i-1) lst
+
+-- problem 19
+rotate :: [a] -> Int -> [a]
+rotate [] _ = []
+rotate lst n 
+    | n >= 0 = drop n lst ++ take n lst
+    | n < 0 = drop (n + length lst) lst ++ take (n + length lst) lst
+
+-- problem 20
+removeAt :: [a] -> Int -> (Maybe a, [a])
+removeAt [] _ = (Nothing, [])
+removeAt lst k = (Just $ lst !! (k-1), take (k-1) lst ++ drop k lst)
