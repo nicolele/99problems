@@ -19,7 +19,7 @@ elementAt' :: [a] -> Int -> a
 elementAt' [] _ = error "out of bounds"
 elementAt' (x:_) 1 = x
 elementAt' (x:xs) k 
-    | k < 1 = error "index out of bounds"
+    | k < 1     = error "index out of bounds"
     | otherwise = elementAt' xs (k-1)
 
 -- problem 4
@@ -30,7 +30,7 @@ numElements (x:xs) = 1 + numElements xs
 numElements' :: [a] -> Int -- tail recursive
 numElements' list = numElements_acc list 0 
     where 
-        numElements_acc [] n = n
+        numElements_acc [] n     = n
         numElements_acc (_:xs) n = numElements_acc xs (n + 1)
 
 -- problem 5
@@ -126,7 +126,7 @@ rotate :: [a] -> Int -> [a]
 rotate [] _ = []
 rotate lst n 
     | n >= 0 = drop n lst ++ take n lst
-    | n < 0 = drop (n + length lst) lst ++ take (n + length lst) lst
+    | n < 0  = drop (n + length lst) lst ++ take (n + length lst) lst
 
 -- problem 20
 removeAt :: [a] -> Int -> (Maybe a, [a])
