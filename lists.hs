@@ -1,3 +1,6 @@
+import System.Random
+import Control.Monad (replicateM)
+
 -- problem 1
 myLast :: [a] -> a
 myLast [] = error "empty list!"
@@ -142,5 +145,3 @@ range :: Int -> Int -> [Int]
 range i k 
     | i <= k    = i : range (i+1) k
     | otherwise = []
-
--- problem 23
